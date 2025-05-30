@@ -16,8 +16,9 @@ public class MessageService : IMessageService
     public async Task<IEnumerable<Message>> GetMessagesByChatIdAsync(int chatId)
     {
         return await _context.Messages
-            .Where(m => m.ChatId == chatId)
+            .AsNoTracking()
             .Include(m => m.User)
+            .Where(m => m.ChatId == chatId)
             .OrderBy(m => m.CreatedAt)
             .ToListAsync();
     }

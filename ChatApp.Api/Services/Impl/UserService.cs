@@ -27,8 +27,6 @@ public class UserService : IUserService
     public async Task<User> CreateUserAsync(CreateUserRequest request)
     {
         var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == request.Email);
-        Console.WriteLine($"existingUser: {System.Text.Json.JsonSerializer.Serialize(existingUser)}");
-
         if (existingUser != null)
         {
             throw new ArgumentException("Username already exists");

@@ -41,20 +41,19 @@ public class ChatService : IChatService
 
         // 3. Формируем связи ChatUser
         var members = userIds
-            .Select(uid => new ChatUser {
-                ChatId   = chat.Id,
-                UserId   = uid
-            })
-            .ToList();
+            .Select(uid => new ChatUser
+            {
+                ChatId = chat.Id,
+                UserId = uid
+            });
 
-        _context.Set<ChatUser>().AddRange(members);
+        _context.ChatUser.AddRange(members);
         await _context.SaveChangesAsync();
         
-        await _context.Entry(chat)
-            .Collection(c => c.Members)
-            .Query()
-            .Include(m => m.User)
-            .LoadAsync();
+        await _context.Chats
+            .Include(s => s.Members)
+            .ThenInclude(s => s.User)
+            .FirstOrDefaultAsync(s => s.Id == chat.Id);
         
         return chat;
     }
