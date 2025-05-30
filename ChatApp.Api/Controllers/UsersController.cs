@@ -65,7 +65,6 @@ namespace ChatApp.Api.Controllers
             }
 
             var users = await _userService.GetAllUsersAsync(userId);
-            ;
             var usersDto = _mapper.Map<IEnumerable<UserDto>>(users);
             
             return Ok(usersDto);

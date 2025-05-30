@@ -16,8 +16,6 @@ obj/
 
 packages/
 
-appsettings.*.json
-
 # Docker named volume mount (если у вас локально лежит папка с данными)
 chatapp-data/
 
