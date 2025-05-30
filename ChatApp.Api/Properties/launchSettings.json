@@ -1,0 +1,33 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "ChatApp.Api (HTTP)": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5077",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnection": "Host=localhost;Port=5433;Database=chatapp;Username=postgres;Password=postgres",
+        "JwtSettings__SecretKey": "G7mP2vQ8rL9tK4yJ1xZ5uN6wM3hB0fQ7p",
+        "JwtSettings__Issuer": "chatapp",
+        "JwtSettings__Audience": "chatapp_users",
+        "JwtSettings__ExpirationMinutes": "60"
+      }
+    },
+    "ChatApp.Api (HTTPS)": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7146;http://localhost:5077",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnection": "Host=localhost;Port=5433;Database=chatapp;Username=postgres;Password=postgres",
+        "JwtSettings__SecretKey": "G7mP2vQ8rL9tK4yJ1xZ5uN6wM3hB0fQ7p",
+        "JwtSettings__Issuer": "chatapp",
+        "JwtSettings__Audience": "chatapp_users",
+        "JwtSettings__ExpirationMinutes": "60"
+      }
+    }
+  }
+}

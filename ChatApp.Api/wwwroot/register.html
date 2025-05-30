@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Регистрация</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; max-width: 400px; margin: auto; }
+        form > div { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: .3rem; }
+        input { width: 100%; padding: .5rem; box-sizing: border-box; }
+        button { padding: .6rem 1.2rem; }
+        #msg { color: red; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+<h1>Регистрация</h1>
+<form id="regForm">
+    <div>
+        <label for="username">Имя пользователя</label>
+        <input id="username" name="username" required />
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+    </div>
+    <div>
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" required />
+    </div>
+    <button type="submit">Зарегистрироваться</button>
+</form>
+<div id="msg"></div>
+
+<script>
+    (function() {
+        const form = document.getElementById('regForm');
+        const msg  = document.getElementById('msg');
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            msg.textContent = '';
+
+            const username = form.username.value.trim();
+            const email    = form.email.value.trim();
+            const password = form.password.value;
+
+            try {
+                const res = await fetch('/api/Users/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || 'Регистрация не удалась');
+                }
+
+                // Успешно зарегистрированы — идём на страницу логина
+                window.location.href = '/login.html';
+            } catch (err) {
+                msg.textContent = err.message || 'Ошибка регистрации';
+            }
+        });
+    })();
+</script>
+</body>
+</html>

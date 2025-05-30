@@ -1,0 +1,24 @@
+bin/
+obj/
+
+.vs/
+.vscode/
+
+*.user
+*.suo
+
+.idea/
+
+# Logs
+*.log
+
+.env
+
+appsettings.*.json
+
+# Docker named volume mount (если у вас локально лежит папка с данными)
+chatapp-data/
+
+# OS files
+.DS_Store
+Thumbs.db

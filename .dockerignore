@@ -1,0 +1,17 @@
+﻿bin/
+obj/
+.vs/
+.vscode/
+.idea/
+
+.git
+.gitignore
+
+.env
+
+*.log
+
+# Docker Compose files (если не нужны в образе)
+docker-compose*.yaml
+
+*.md

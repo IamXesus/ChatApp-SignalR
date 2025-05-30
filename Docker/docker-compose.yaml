@@ -1,0 +1,37 @@
+﻿services:
+  web:
+    build:
+      context: .
+      dockerfile: ../ChatApp.Api/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=chatapp;Username=postgres;Password=postgres"
+      JWT_SECRET_KEY:     "G7mP2vQ8rL9tK4yJ1xZ5uN6wM3hB0fQ7p"
+      JWT_ISSUER:         "chatapp"
+      JWT_AUDIENCE:       "chatapp_users"
+      JWT_EXPIRATION_MINUTES: "60"
+      ASPNETCORE_URLS:    "http://+:80"
+      ASPNETCORE_ENVIRONMENT: "Development"
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB:       chatapp
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: postgres
+      ASPNETCORE_ENVIRONMENT: "Development"
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - chatapp-data:/var/lib/postgresql/data
+
+volumes:
+  chatapp-data:
